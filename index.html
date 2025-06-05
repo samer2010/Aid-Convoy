@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>قافلة الإغاثة | تبرع لأهل غزة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="تبرع الآن لدعم أهالي غزة عبر قافلة الإغاثة. مساعدات غذائية، طبية، وإيواء للمحتاجين.">
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --primary-dark: #FF4757;
+            --secondary: #4ECDC4;
+            --dark: #1E272E;
+            --darker: #0F0F1A;
+            --light: #F5F6FA;
+            --success: #2ED573;
+            --warning: #FFA502;
+            --text: #F1F2F6;
+            --text-secondary: #BDC3C7;
+            --bg: #1E272E;
+            --card-bg: #2F3640;
+            --border: #3D3D3D;
+            --shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        [data-theme="light"] {
+            --bg: #F5F6FA;
+            --card-bg: #FFFFFF;
+            --text: #2F3640;
+            --text-secondary: #7F8C8D;
+            --border: #E0E0E0;
+            --darker: #F5F6FA;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* شريط التقدم */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: var(--card-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+        }
+        
+        /* الهيدر المعدل */
+        header {
+            background: linear-gradient(135deg, rgba(30, 39, 46, 0.9), rgba(78, 205, 196, 0.7)), 
+                        url('https://images.unsplash.com/photo-1631898034045-8d6d4a1f3ca3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+            background: rgba(0,0,0,0.5);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .logo span {
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .logo span::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        /* القائمة المحسنة */
+        nav {
+            background-color: var(--dark);
+            padding: 0.8rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin: 0 0.3rem;
+            position: relative;
+        }
+        
+        .nav-menu a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.7rem 1rem;
+            border-radius: 50px;
+            display: block;
+            transition: all 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-menu a.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        /* المحتوى الرئيسي */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--text);
+            position: relative;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        
+        /* صندوق التبرع المحسن */
+        .donation-section {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .donation-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+        }
+        
+        .currency-selector {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .currency-tab {
+            padding: 0.7rem 1.5rem;
+            background: var(--darker);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        
+        .currency-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(255,107,107,0.3);
+        }
+        
+        .donation-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .donation-option {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .donation-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255,107,107,0.2);
+        }
+        
+        .donation-option.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(255,107,107,0.3);
+        }
+        
+        .donation-option .amount {
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        
+        .donation-option .currency {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .donation-option.active .currency {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .custom-amount {
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .custom-amount label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .custom-amount input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            text-align: center;
+            background-color: var(--card-bg);
+            color: var(--text);
+            transition: all 0.3s;
+        }
+        
+        .custom-amount input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+        }
+        
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .payment-method {
+            width: 60px;
+            height: 40px;
+            object-fit: contain;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.3rem;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .payment-method.selected {
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 0 2px rgba(255,107,107,0.3);
+        }
+        
+        .donate-btn {
+            display: block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s;
+        }
+        
+        .donate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
+        }
+        
+        .donate-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .donate-btn .icon {
+            margin-left: 0.5rem;
+        }
+        
+        /* أقسام إضافية */
+        .impact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .impact-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border-top: 4px solid var(--primary);
+            box-shadow: var(--shadow);
+        }
+        
+        .impact-card .number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .testimonial {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            position: relative;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+        
+        .testimonial::before {
+            content: "\201C";
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: var(--darker);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .author-info .name {
+            font-weight: 700;
+        }
+        
+        .author-info .role {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        /* التذييل */
+        footer {
+            background-color: var(--dark);
+            color: var(--text);
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        
+        .footer-logo span {
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-link {
+            color: var(--text-secondary);
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* تأثيرات الحركة */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        /* تحسينات للجوال */
+        @media (max-width: 768px) {
+            header {
+                padding: 4rem 1rem;
+            }
+            
+            .header-content {
+                padding: 1.5rem;
+            }
+            
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                padding: 1rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                z-index: 999;
+            }
+            
+            .nav-menu.show {
+                display: flex;
+            }
+            
+            .nav-menu li {
+                margin: 0.5rem 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .donation-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .donation-option {
+                padding: 1rem 0.5rem;
+            }
+            
+            .testimonial {
+                padding: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .donation-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .currency-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التقدم -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="header-content fade-in">
+            <div class="logo">قافلة <span>الإغاثة</span></div>
+            <h1 style="margin-bottom: 1rem;">كل تبرعك يصنع فرقاً في حياة المحتاجين</h1>
+            <p style="font-size: 1.1rem;">نقدم المساعدات العاجلة لأهالي غزة منذ 2015</p>
+        </div>
+    </header>
+    
+    <!-- القائمة -->
+    <nav>
+        <div class="nav-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#about" class="active">عن الحملة</a></li>
+                <li><a href="#donate">تبرع الآن</a></li>
+                <li><a href="#impact">تأثيرنا</a></li>
+                <li><a href="#stories">قصص النجاح</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- المحتوى الرئيسي -->
+    <div class="container">
+        <!-- قسم عن الحملة -->
+        <section id="about" class="fade-in">
+            <h2 class="section-title">عن حملتنا</h2>
+            <div style="background-color: var(--card-bg); padding: 1.5rem; border-radius: 15px; border: 1px solid var(--border); box-shadow: var(--shadow);">
+                <p style="margin-bottom: 1.5rem;">في ظل الأزمة الإنسانية المستمرة في غزة، تأتي حملة "قافلة الإغاثة" كشريان حياة لأهالي القطاع. نعمل على الأرض منذ عام 2015 لتقديم المساعدات العاجلة والمستدامة.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+                    <div style="background-color: var(--darker); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--primary);">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-bullseye"></i> رؤيتنا</h3>
+                        <p>غزة حيث يتمتع كل فرد بحياة كريمة وآمنة</p>
+                    </div>
+                    <div style="background-color: var(--darker); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--secondary);">
+                        <h3 style="color: var(--secondary); margin-bottom: 1rem;"><i class="fas fa-hands-helping"></i> مهمتنا</h3>
+                        <p>تقديم المساعدات العاجلة والمستدامة للمحتاجين</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin: 1.5rem 0 1rem; color: var(--primary);"><i class="fas fa-check-circle"></i> كيف سيستخدم تبرعك؟</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <div style="color: var(--primary); font-size: 1.2rem;"><i class="fas fa-bread-slice"></i></div>
+                        <div>
+                            <h4 style="margin-bottom: 0.3rem;">سلال غذائية</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">تكفي عائلة لمدة شهر</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <div style="color: var(--primary); font-size: 1.2rem;"><i class="fas fa-prescription-bottle-medical"></i></div>
+                        <div>
+                            <h4 style="margin-bottom: 0.3rem;">أدوية</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">لمستشفيات ومستوصفات غزة</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <div style="color: var(--primary); font-size: 1.2rem;"><i class="fas fa-home"></i></div>
+                        <div>
+                            <h4 style="margin-bottom: 0.3rem;">مأوى</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">للمشردين بسبب القصف</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <div style="color: var(--primary); font-size: 1.2rem;"><i class="fas fa-user-graduate"></i></div>
+                        <div>
+                            <h4 style="margin-bottom: 0.3rem;">تعليم</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">لمدارس وطلاب غزة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- قسم التبرع -->
+        <section id="donate" class="fade-in">
+            <h2 class="section-title">تبرع الآن</h2>
+            <div class="donation-section">
+                <div class="currency-selector">
+                    <div class="currency-tab active" data-currency="ils">شيكل (ILS)</div>
+                    <div class="currency-tab" data-currency="usd">دولار (USD)</div>
+                    <div class="currency-tab" data-currency="eur">يورو (EUR)</div>
+                    <div class="currency-tab" data-currency="gbp">جنيه (GBP)</div>
+                    <div class="currency-tab" data-currency="aed">درهم (AED)</div>
+                </div>
+                
+                <p style="text-align: center; margin-bottom: 1rem; color: var(--text-secondary);">اختر مبلغ التبرع أو أدخل المبلغ الذي تريده</p>
+                
+                <div class="donation-options">
+                    <div class="donation-option" data-amount="50" data-currency="ils">
+                        <span class="amount">50</span>
+                        <span class="currency">شيكل</span>
+                    </div>
+                    <div class="donation-option" data-amount="100" data-currency="ils">
+                        <span class="amount">100</span>
+                        <span class="currency">شيكل</span>
+                    </div>
+                    <div class="donation-option" data-amount="200" data-currency="ils">
+                        <span class="amount">200</span>
+                        <span class="currency">شيكل</span>
+                    </div>
+                    <div class="donation-option" data-amount="500" data-currency="ils">
+                        <span class="amount">500</span>
+                        <span class="currency">شيكل</span>
+                    </div>
+                    <div class="donation-option" data-amount="1000" data-currency="ils">
+                        <span class="amount">1000</span>
+                        <span class="currency">شيكل</span>
+                    </div>
+                </div>
+                
+                <div class="custom-amount">
+                    <label for="custom-amount-input"><i class="fas fa-edit"></i> مبلغ آخر</label>
+                    <input type="number" id="custom-amount-input" placeholder="أدخل المبلغ">
+                </div>
+                
+                <div style="margin: 1.5rem 0;">
+                    <h3 style="text-align: center; margin-bottom: 1rem; color: var(--text-secondary);">اختر طريقة الدفع</h3>
+                    <div class="payment-methods">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="payment-method" title="PayPal">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" class="payment-method" title="Stripe">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg" alt="Bitcoin" class="payment-method" title="Bitcoin">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Visa_2021.svg" alt="Visa" class="payment-method" title="Visa">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Mastercard_2019_logo.svg" alt="Mastercard" class="payment-method" title="Mastercard">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/PayMob_Logo.png" alt="PayMob" class="payment-method" title="PayMob">
+                    </div>
+                </div>
+                
+                <button class="donate-btn" id="donate-btn">
+                    <i class="fas fa-hand-holding-heart icon"></i> تبرع الآن
+                </button>
+            </div>
+            
+            <div style="background-color: var(--card-bg); padding: 1.5rem; border-radius: 15px; margin-top: 1.5rem; border: 1px solid var(--border);">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;"><i class="fas fa-calendar-check"></i> كن شريكًا شهريًا</h3>
+                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px;">
+                        <input type="number" id="monthly-amount" placeholder="المبلغ الشهري" style="width: 100%; padding: 0.8rem 1rem; border-radius: 8px; border: 1px solid var(--border); background: var(--darker); color: var(--text);">
+                    </div>
+                    <button style="background: var(--success); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 500; cursor: pointer;">
+                        اشترك شهريًا
+                    </button>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                    <i class="fas fa-info-circle"></i> سيتم خصم المبلغ تلقائيًا كل شهر
+                </p>
+            </div>
+        </section>
+        
+        <!-- قسم التأثير -->
+        <section id="impact" class="fade-in">
+            <h2 class="section-title">تأثيرنا</h2>
+            <div class="impact-cards">
+                <div class="impact-card">
+                    <div class="number">+25K</div>
+                    <div class="description">عائلة مستفيدة</div>
+                </div>
+                <div class="impact-card">
+                    <div class="number">+500</div>
+                    <div class="description">طن مواد غذائية</div>
+                </div>
+                <div class="impact-card">
+                    <div class="number">+120</div>
+                    <div class="description">مشروع إغاثة</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- قسم قصص النجاح -->
+        <section id="stories" class="fade-in">
+            <h2 class="section-title">قصص النجاح</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "بفضل تبرعاتكم، استطعنا إنقاذ حياة عشرات الأطفال في مستشفى الشفاء بتوفير الأدوية النادرة. شكراً لكل من ساهم."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="author-info">
+                            <div class="name">د. محمد عبد الله</div>
+                            <div class="role">طبيب في مستشفى الشفاء</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "السلة الغذائية التي وصلتنا أنقذت أطفالي من الجوع لمدة شهر كامل. جزاكم الله خيراً على هذا العمل الإنساني."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <div class="name">أم أحمد</div>
+                            <div class="role">أم لخمسة أطفال - غزة</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        "كمتبرع، أشعر بالاطمئنان عندما أرى تقارير مفصلة عن كيفية استخدام تبرعاتي. شفافيتكم هي ما جعلني أواصل الدعم."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="author-info">
+                            <div class="name">خالد السيد</div>
+                            <div class="role">متبرع من السعودية</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- التذييل -->
+    <footer id="contact" class="fade-in">
+        <div class="footer-content">
+            <div class="footer-logo">قافلة <span>الإغاثة</span></div>
+            <p>من أجل غزة.. يداً بيد</p>
+            
+            <div class="footer-links">
+                <a href="#about" class="footer-link">عن الحملة</a>
+                <a href="#donate" class="footer-link">تبرع الآن</a>
+                <a href="#impact" class="footer-link">تأثيرنا</a>
+                <a href="#stories" class="footer-link">قصص النجاح</a>
+                <a href="#" class="footer-link">سياسة الخصوصية</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            
+            <div style="margin-top: 1.5rem;">
+                <p><i class="fas fa-envelope"></i> info@qafila.org</p>
+                <p style="margin-top: 0.5rem;"><i class="fas fa-phone"></i> +972 59 123 4567</p>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 قافلة الإغاثة. جميع الحقوق محفوظة.</p>
+                <p style="margin-top: 0.5rem;">تسجيل جمعية خيرية رقم: 12345</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // تبديل الوضع الليلي/النهاري
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+        
+        // تحقق من تفضيلات المستخدم
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            body.classList.add('light-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // تحميل التفضيلات المحفوظة
+        if (localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        // القائمة المنسدلة للجوال
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.classList.toggle('show');
+            if (navMenu.classList.contains('show')) {
+                this.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                this.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+        
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('show');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // شريط التقدم
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        });
+        
+        // اختيار العملة
+        const currencyTabs = document.querySelectorAll('.currency-tab');
+        currencyTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                currencyTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // هنا يمكنك تحديث أسعار الصرف حسب العملة المختارة
+                const currency = this.getAttribute('data-currency');
+                updateDonationOptions(currency);
+            });
+        });
+        
+        // دالة لتحديث خيارات التبرع حسب العملة
+        function updateDonationOptions(currency) {
+            const amounts = {
+                'ils': [50, 100, 200, 500, 1000],
+                'usd': [10, 25, 50, 100, 200],
+                'eur': [10, 20, 50, 100, 150],
+                'gbp': [10, 20, 40, 80, 120],
+                'aed': [50, 100, 200, 400, 600]
+            };
+            
+            const currencyNames = {
+                'ils': 'شيكل',
+                'usd': 'دولار',
+                'eur': 'يورو',
+                'gbp': 'جنيه',
+                'aed': 'درهم'
+            };
+            
+            const options = document.querySelectorAll('.donation-option');
+            options.forEach((option, index) => {
+                option.setAttribute('data-currency', currency);
+                option.querySelector('.amount').textContent = amounts[currency][index];
+                option.querySelector('.currency').textContent = currencyNames[currency];
+            });
+            
+            document.getElementById('custom-amount-input').placeholder = `أدخل المبلغ بال${currencyNames[currency]}`;
+        }
+        
+        // اختيار مبلغ التبرع
+        const donationOptions = document.querySelectorAll('.donation-option');
+        const customAmountInput = document.getElementById('custom-amount-input');
+        let selectedAmount = 0;
+        let selectedCurrency = 'ils';
+        
+        donationOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                donationOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                selectedAmount = this.getAttribute('data-amount');
+                selectedCurrency = this.getAttribute('data-currency');
+                customAmountInput.value = '';
+                
+                // تأثير النقر
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+            
+            // تحسينات اللمس للجوال
+            option.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+            
+            option.addEventListener('touchend', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+        
+        customAmountInput.addEventListener('input', function() {
+            donationOptions.forEach(opt => opt.classList.remove('active'));
+            selectedAmount = this.value;
+        });
+        
+        // اختيار طريقة الدفع
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        let selectedMethod = null;
+        
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', function() {
+                paymentMethods.forEach(m => m.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedMethod = this.alt;
+                
+                // تأثير النقر
+                this.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+        
+        // زر التبرع
+        document.getElementById('donate-btn').addEventListener('click', function() {
+            if (!selectedAmount || selectedAmount <= 0) {
+                alert('الرجاء اختيار مبلغ التبرع أو إدخال مبلغ صحيح');
+                return;
+            }
+            
+            if (!selectedMethod) {
+                alert('الرجاء اختيار طريقة الدفع أولاً');
+                return;
+            }
+            
+            // تأثير النقر
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 200);
+            
+            initiatePayment(selectedAmount, selectedCurrency, selectedMethod);
+        });
+        
+        // دالة بدء عملية الدفع
+        function initiatePayment(amount, currency, method) {
+            // هنا يمكنك إضافة التكامل مع بوابة الدفع الفعلية
+            alert(`سيتم توجيهك لصفحة الدفع\nالمبلغ: ${amount} ${currency}\nطريقة الدفع: ${method}`);
+            
+            // مثال مع Paymob:
+            // window.open(`https://accept.paymob.com/api/acceptance/iframes/YOUR_IFRAME_ID?payment_token=TOKEN`);
+        }
+        
+        // تنعيم التمرير للروابط الداخلية
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // إغلاق القائمة إذا كانت مفتوحة
+                    if (navMenu.classList.contains('show')) {
+                        navMenu.classList.remove('show');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+        
+        // تأثيرات الظهور عند التمرير
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkScroll() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+    </script>
+</body>
+</html>
